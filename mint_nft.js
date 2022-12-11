@@ -1,13 +1,11 @@
-const mint_nft = async (signer_address, provider, ticket_demo_contract) => {
+const mint_nft = async (provider, ticket_demo_contract) => {
   const gasPrice = Math.round((await provider.getGasPrice()) * 1.15);
-  const nonce = await provider.getTransactionCount(signer_address);
 
   const mint_tx = await ticket_demo_contract.mintNfticket(
     "ipfs://QmXABjGNK3PbffbjZYr4iJ5FLxRooc6b6hbPXoNdkfXPRx",
     {
       gasLimit: 1000000,
       gasPrice: gasPrice,
-      nonce: nonce,
     }
   );
 

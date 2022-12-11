@@ -10,7 +10,7 @@ const ethers = require("ethers");
 const provider = require("./provider");
 
 const doIt = async () => {
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < 15; i++) {
     console.log(`----- ${i} -------`);
     const { privateKey, address } = generate_wallet();
     await send(process.env.SPENDER_PRIVATEKEY, address, "0.2");
@@ -24,32 +24,13 @@ const mint_nft_get_37_tokens = async (private_key) => {
 
   const NFTicketDemoServiceContract = get_contract(signer);
 
-  const token_id = await mint_nft(
-    signer.address,
-    provider,
-    NFTicketDemoServiceContract
-  );
+  const token_id = await mint_nft(provider, NFTicketDemoServiceContract);
 
-  await redeem_ticket(
-    token_id,
-    signer.address,
-    provider,
-    NFTicketDemoServiceContract
-  );
+  await redeem_ticket(token_id, provider, NFTicketDemoServiceContract);
 
-  await add_balance_to_ticket(
-    token_id,
-    signer.address,
-    provider,
-    NFTicketDemoServiceContract
-  );
+  await add_balance_to_ticket(token_id, provider, NFTicketDemoServiceContract);
 
-  await get_erc_20(
-    token_id,
-    signer.address,
-    provider,
-    NFTicketDemoServiceContract
-  );
+  await get_erc_20(token_id, provider, NFTicketDemoServiceContract);
 };
 
 doIt();

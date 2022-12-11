@@ -1,3 +1,4 @@
+require("dotenv").config();
 const ethers = require("ethers");
 const get_contract = require("./get_contract");
 const get_erc_20 = require("./get_erc_20");
@@ -9,25 +10,25 @@ const provider = require("./provider");
 const get_erc = async (token_id, private_key) => {
   const signer = new ethers.Wallet(private_key, provider);
   const contract = get_contract(signer);
-  await get_erc_20(token_id, signer.address, provider, contract);
+  await get_erc_20(token_id, provider, contract);
 };
 
 const redeem = async (token_id, private_key) => {
   const signer = new ethers.Wallet(private_key, provider);
   const contract = get_contract(signer);
-  await redeem_ticket(token_id, signer.address, provider, contract);
+  await redeem_ticket(token_id, provider, contract);
 };
 
 const add_balance = async (token_id, private_key) => {
   const signer = new ethers.Wallet(private_key, provider);
   const contract = get_contract(signer);
-  await add_balance_to_ticket(token_id, signer.address, provider, contract);
+  await add_balance_to_ticket(token_id, provider, contract);
 };
 
 const mint = async (private_key) => {
   const signer = new ethers.Wallet(private_key, provider);
   const contract = get_contract(signer);
-  await mint_nft(signer.address, provider, contract);
+  await mint_nft(provider, contract);
 };
 
-get_erc(123, "");
+get_erc(1124, process.env.CURRENT_PRIVATEKEY);
