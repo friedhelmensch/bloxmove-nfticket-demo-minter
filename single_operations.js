@@ -3,6 +3,7 @@ const get_contract = require("./get_contract");
 const get_erc_20 = require("./get_erc_20");
 const redeem_ticket = require("./redeem_ticket");
 const add_balance_to_ticket = require("./add_balance_to_ticket");
+const mint_nft = require("./mint_nft");
 const provider = require("./provider");
 
 const get_erc = async (token_id, private_key) => {
@@ -23,4 +24,10 @@ const add_balance = async (token_id, private_key) => {
   await add_balance_to_ticket(token_id, signer.address, provider, contract);
 };
 
-get_erc(123, "_");
+const mint = async (private_key) => {
+  const signer = new ethers.Wallet(private_key, provider);
+  const contract = get_contract(signer);
+  await mint_nft(signer.address, provider, contract);
+};
+
+get_erc(123, "");
