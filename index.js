@@ -1,16 +1,20 @@
-require("dotenv").config();
-const generate_wallet = require("./generate_wallet");
-const send = require("./send_matic");
-const get_erc_20 = require("./get_erc_20");
-const add_balance_to_ticket = require("./add_balance_to_ticket");
-const redeem_ticket = require("./redeem_ticket");
-const get_contract = require("./get_contract");
-const mint_nft = require("./mint_nft");
 const ethers = require("ethers");
-const provider = require("./provider");
+require("dotenv").config();
+
+//lib
+const generate_wallet = require("./lib/generate_wallet");
+const send = require("./lib/send_matic");
+//methods
+const mint_nft = require("./methods/mint_nft");
+const redeem_ticket = require("./methods/redeem_ticket");
+const get_erc_20 = require("./methods/get_erc_20");
+const add_balance_to_ticket = require("./methods/add_balance_to_ticket");
+//utils
+const provider = require("./utils/provider");
+const get_contract = require("./utils/get_contract");
 
 const doIt = async () => {
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 1; i++) {
     console.log(`----- ${i} -------`);
     const { privateKey, address } = generate_wallet();
     await send(process.env.SPENDER_PRIVATEKEY, address, "0.2");

@@ -1,11 +1,15 @@
 require("dotenv").config();
 const ethers = require("ethers");
-const get_contract = require("./get_contract");
-const get_erc_20 = require("./get_erc_20");
-const redeem_ticket = require("./redeem_ticket");
-const add_balance_to_ticket = require("./add_balance_to_ticket");
-const mint_nft = require("./mint_nft");
-const provider = require("./provider");
+
+//methods
+const mint_nft = require("./methods/mint_nft");
+const redeem_ticket = require("./methods/redeem_ticket");
+const add_balance_to_ticket = require("./methods/add_balance_to_ticket");
+const get_erc_20 = require("./methods/get_erc_20");
+
+//utils
+const get_contract = require("./utils/get_contract");
+const provider = require("./utils/provider");
 
 const get_erc = async (token_id, private_key) => {
   const signer = new ethers.Wallet(private_key, provider);
