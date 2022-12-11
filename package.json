@@ -1,0 +1,15 @@
+{
+  "name": "bloxmove",
+  "version": "1.0.0",
+  "description": "Mint ALL the tokens",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "ethers": "^5.7.2"
+  }
+}
