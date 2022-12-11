@@ -1,5 +1,5 @@
 {
-  "name": "bloxmove",
+  "name": "bloxmove_nfticket_minter",
   "version": "1.0.0",
   "description": "Mint ALL the tokens",
   "main": "index.js",
