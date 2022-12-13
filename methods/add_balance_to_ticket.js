@@ -1,13 +1,14 @@
+const get_gas_price = require("../lib/get_gas_price");
+
 const add_balance_to_ticket = async (
   token_id,
   provider,
   ticket_demo_contract
 ) => {
-  const gasPrice = Math.round((await provider.getGasPrice()) * 1.15);
-
+  const gasPrice = await get_gas_price(provider);
   const add_balance_to_ticket_tx =
     await ticket_demo_contract.addBalanceToTicket(token_id, {
-      gasLimit: 2000000,
+      gasLimit: 2500000,
       gasPrice: gasPrice,
     });
 

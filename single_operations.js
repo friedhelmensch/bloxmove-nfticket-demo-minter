@@ -35,4 +35,4 @@ const mint = async (private_key) => {
   await mint_nft(provider, contract);
 };
 
-get_erc(1124, process.env.CURRENT_PRIVATEKEY);
+redeem(1570, process.env.CURRENT_PRIVATEKEY);

@@ -1,6 +1,7 @@
-const mint_nft = async (provider, ticket_demo_contract) => {
-  const gasPrice = Math.round((await provider.getGasPrice()) * 1.15);
+const get_gas_price = require("../lib/get_gas_price");
 
+const mint_nft = async (provider, ticket_demo_contract) => {
+  const gasPrice = await get_gas_price(provider);
   const mint_tx = await ticket_demo_contract.mintNfticket(
     "ipfs://QmXABjGNK3PbffbjZYr4iJ5FLxRooc6b6hbPXoNdkfXPRx",
     {
