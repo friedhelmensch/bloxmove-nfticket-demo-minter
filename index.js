@@ -17,7 +17,7 @@ const doIt = async () => {
   for (let i = 0; i < 1; i++) {
     console.log(`----- ${i} -------`);
     const { privateKey, address } = generate_wallet();
-    await send(process.env.SPENDER_PRIVATEKEY, address, "0.2");
+    await send(process.env.SPENDER_PRIVATEKEY, address, "0.25");
     await mint_nft_get_37_tokens(privateKey);
   }
 };
