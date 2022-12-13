@@ -10,6 +10,7 @@ const get_erc_20 = require("./methods/get_erc_20");
 //utils
 const get_contract = require("./utils/get_contract");
 const provider = require("./utils/provider");
+const send_matic = require("./lib/send_matic");
 
 const get_erc = async (token_id, private_key) => {
   const signer = new ethers.Wallet(private_key, provider);
@@ -35,4 +36,8 @@ const mint = async (private_key) => {
   await mint_nft(provider, contract);
 };
 
-redeem(1570, process.env.CURRENT_PRIVATEKEY);
+const send = async (private_key, to, amount) => {
+  await send_matic(private_key, to, amount);
+};
+
+get_erc(123, process.env.CURRENT_PRIVATEKEY);
