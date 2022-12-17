@@ -12,6 +12,13 @@ const get_contract = require("./utils/get_contract");
 const provider = require("./utils/provider");
 const send_matic = require("./lib/send_matic");
 
+//lib
+const generate_wallet = require("./lib/generate_wallet");
+
+const generate = () => {
+  console.log(generate_wallet());
+};
+
 const get_erc = async (token_id, private_key) => {
   const signer = new ethers.Wallet(private_key, provider);
   const contract = get_contract(signer);
@@ -40,4 +47,5 @@ const send = async (private_key, to, amount) => {
   await send_matic(private_key, to, amount);
 };
 
-get_erc(123, process.env.CURRENT_PRIVATEKEY);
+generate();
+//get_erc(123, process.env.CURRENT_PRIVATEKEY);
