@@ -1,4 +1,3 @@
-require("dotenv").config();
 const ethers = require("ethers");
 const provider = require("../utils/provider");
 const get_gas_price = require("./get_gas_price");

@@ -1,5 +1,4 @@
 const ethers = require("ethers");
-require("dotenv").config();
 
 let provider = new ethers.providers.InfuraProvider(
   "matic",

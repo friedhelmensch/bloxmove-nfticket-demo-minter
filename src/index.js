@@ -4,6 +4,8 @@ require("dotenv").config();
 //lib
 const generate_wallet = require("./lib/generate_wallet");
 const send = require("./lib/send_matic");
+const save_wallet = require("./lib/save_wallet");
+
 //methods
 const mint_nft = require("./methods/mint_nft");
 const redeem_ticket = require("./methods/redeem_ticket");
@@ -16,9 +18,12 @@ const get_contract = require("./utils/get_contract");
 const doIt = async () => {
   for (let i = 0; i < 1; i++) {
     console.log(`----- ${i} -------`);
-    const { privateKey, address } = generate_wallet();
-    await send(process.env.SPENDER_PRIVATEKEY, address, "0.25");
-    await mint_nft_get_37_tokens(privateKey);
+
+    const wallet = generate_wallet();
+    save_wallet(process.env.WALLETS_PATH, wallet);
+
+    await send(process.env.SPENDER_PRIVATEKEY, wallet.address, "0.25");
+    await mint_nft_get_37_tokens(wallet.privateKey);
   }
 };
 

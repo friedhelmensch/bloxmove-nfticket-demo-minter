@@ -4,12 +4,17 @@
   "description": "Mint ALL the tokens",
   "main": "index.js",
   "scripts": {
-    "start": "node ./src/index.js"
+    "start": "node ./src/index.js",
+    "test": "mocha test/**/**"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.0.3",
     "ethers": "^5.7.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
   }
 }
