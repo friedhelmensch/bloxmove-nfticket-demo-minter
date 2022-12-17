@@ -2,10 +2,10 @@ const generate_wallet = require("../../src/lib/generate_wallet");
 const save_wallet = require("../../src/lib/save_wallet");
 const fs = require("fs");
 var expect = require("chai").expect;
+const path = `${__dirname}/test_wallets`;
 
 describe("save_wallet", function () {
   it("saves a wallet", function () {
-    const path = `${__dirname}/test_wallets`;
     const wallet = generate_wallet();
     save_wallet(path, wallet);
 
