@@ -12,6 +12,10 @@ describe("save_wallet", function () {
     const saved_wallet = read_wallet(`${path}/${wallet.address}.txt`);
     expect(saved_wallet).to.deep.equal(wallet);
   });
+
+  after(() => {
+    console.log("after mafter");
+  });
 });
 
 const read_wallet = (path) => {
