@@ -10,7 +10,7 @@ const get_erc_20 = require("./methods/get_erc_20");
 //utils
 const get_contract = require("./utils/get_contract");
 const provider = require("./utils/provider");
-const send_matic = require("./lib/send_matic");
+const send = require("./lib/send");
 
 //lib
 const generate_wallet = require("./lib/generate_wallet");
@@ -43,8 +43,8 @@ const mint = async (private_key) => {
   await mint_nft(provider, contract);
 };
 
-const send = async (private_key, to, amount) => {
-  await send_matic(private_key, to, amount);
+const send_some = async (private_key, to, amount) => {
+  await send(private_key, to, amount);
 };
 
 generate();

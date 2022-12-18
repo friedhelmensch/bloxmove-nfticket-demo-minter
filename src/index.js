@@ -3,7 +3,7 @@ require("dotenv").config();
 
 //lib
 const generate_wallet = require("./lib/generate_wallet");
-const send = require("./lib/send_matic");
+const send = require("./lib/send");
 const save_wallet = require("./lib/save_wallet");
 
 //methods
@@ -16,21 +16,25 @@ const provider = require("./utils/provider");
 const get_contract = require("./utils/get_contract");
 
 const doIt = async () => {
+  const signer = new ethers.Wallet(process.env.SPENDER_PRIVATEKEY, provider);
+
   for (let i = 0; i < 1; i++) {
     console.log(`----- ${i} -------`);
 
     const wallet = generate_wallet();
     save_wallet(process.env.WALLETS_PATH, wallet);
 
-    await send(process.env.SPENDER_PRIVATEKEY, wallet.address, "0.25");
-    await mint_nft_get_37_tokens(wallet.privateKey);
+    await send(signer, wallet.address, "0.25");
+    console.log(`sent 0.25 matic to ${wallet.address}`);
+
+    console.log(`mint nft and get 37 tokens for ${signer.address}`);
+    await mint_nft_get_37_tokens(
+      new ethers.Wallet(wallet.privateKey, provider)
+    );
   }
 };
 
-const mint_nft_get_37_tokens = async (private_key) => {
-  const signer = new ethers.Wallet(private_key, provider);
-  console.log(`mint nft and get 37 tokens for ${signer.address}`);
-
+const mint_nft_get_37_tokens = async (signer) => {
   const NFTicketDemoServiceContract = get_contract(signer);
 
   const token_id = await mint_nft(provider, NFTicketDemoServiceContract);

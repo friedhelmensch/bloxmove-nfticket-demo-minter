@@ -1,9 +1,7 @@
 const ethers = require("ethers");
 const provider = require("../utils/provider");
-const get_gas_price = require("./get_gas_price");
 
-const send_matic = async (private_key_sender, to, amount) => {
-  const signer = new ethers.Wallet(private_key_sender, provider);
+const send = async (signer, get_gas_price, to, amount) => {
   const gasPrice = await get_gas_price(provider);
 
   const tx = await signer.sendTransaction({
@@ -14,7 +12,7 @@ const send_matic = async (private_key_sender, to, amount) => {
   });
 
   var receipt = await tx.wait();
-  console.log(`sent ${amount} matic to ${to}`);
+  return receipt;
 };
 
-module.exports = send_matic;
+module.exports = send;
