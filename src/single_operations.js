@@ -14,6 +14,7 @@ const send = require("./lib/send");
 
 //lib
 const generate_wallet = require("./lib/generate_wallet");
+const get_gas_price = require("./lib/get_gas_price");
 
 const generate = () => {
   console.log(generate_wallet());
@@ -44,8 +45,14 @@ const mint = async (private_key) => {
 };
 
 const send_some = async (private_key, to, amount) => {
-  await send(private_key, to, amount);
+  const signer = new ethers.Wallet(private_key, provider);
+  await send(signer, get_gas_price, to, amount);
 };
 
-generate();
-//get_erc(123, process.env.CURRENT_PRIVATEKEY);
+// send_some(
+//   process.env.SPENDER_PRIVATEKEY,
+//   "",
+//   "0.15"
+// );
+
+add_balance(123, process.env.CURRENT_PRIVATEKEY);
