@@ -13,11 +13,11 @@ const erc20abi = [
   "event Transfer(address indexed from, address indexed to, uint amount)",
 ];
 
-const get_blxft_contract = (signer) => {
+const get_blxft_contract = (signerOrProvider) => {
   const blxft_contract = new ethers.Contract(
     "0x6e25f32B47914C5996d348e2E7E4fCe204513ECe",
     erc20abi,
-    signer
+    signerOrProvider
   );
 
   return blxft_contract;
