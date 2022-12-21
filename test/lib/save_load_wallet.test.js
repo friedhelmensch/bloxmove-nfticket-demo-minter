@@ -1,19 +1,20 @@
 const generate_wallet = require("../../src/lib/generate_wallet");
 const save_wallet = require("../../src/lib/save_wallet");
+const load_wallet = require("../../src/lib/load_wallet");
 
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 
 var expect = require("chai").expect;
 const path = require("path");
-const wallet_path = `${__dirname}/test_wallets`;
+const wallet_path = `${__dirname}/test_wallets/`;
 
-describe("save_wallet", function () {
-  it("saves a wallet", function () {
+describe("wallet operations", function () {
+  it("saves and loads a wallet", function () {
     const wallet = generate_wallet();
     save_wallet(wallet_path, wallet);
 
-    const saved_wallet = read_wallet(`${wallet_path}/${wallet.address}.txt`);
+    const saved_wallet = load_wallet(`${wallet_path}/${wallet.address}.txt`);
     expect(saved_wallet).to.deep.equal(wallet);
   });
 
@@ -25,15 +26,6 @@ describe("save_wallet", function () {
     await delete_test_wallets();
   });
 });
-
-const read_wallet = (path) => {
-  return JSON.parse(
-    fs.readFileSync(path, {
-      encoding: "utf8",
-      flag: "r",
-    })
-  );
-};
 
 const create_test_wallet_folder = async () => {
   if (!fs.existsSync(wallet_path)) {
