@@ -342,7 +342,7 @@ const abi = [
 
 const get_contract = (signer) => {
   const NFTicketDemoServiceContract = new ethers.Contract(
-    "0x5fc350fe6a22c9b7cf340bc786c3b02e6d18d6ac",
+    "0xB7ed06F965F57F585B0C5A89c67A8C9A373065ed",
     abi,
     signer
   );

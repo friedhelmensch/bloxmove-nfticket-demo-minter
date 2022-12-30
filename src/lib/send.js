@@ -7,7 +7,6 @@ const send = async (signer, get_gas_price, to, amount) => {
   const tx = await signer.sendTransaction({
     to: to,
     value: ethers.utils.parseEther(amount),
-    gasPrice: gasPrice,
     gasLimit: 100000,
   });
 

@@ -58,4 +58,4 @@ const send_some = async (private_key, to, amount) => {
 // );
 
 //mint(process.env.CURRENT_PRIVATEKEY);
-add_balance(123, process.env.CURRENT_PRIVATEKEY);
+generate();
