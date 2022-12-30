@@ -17,19 +17,12 @@ const get_contract = require("./utils/get_contract");
 
 const doIt = async () => {
   const wallets = await load_all_wallets(process.env.WALLETS_PATH);
-  const chunked_wallets = chunk_array(wallets, 1);
 
-  chunked_wallets.forEach(async (chunk) => {
-    const promises = chunk.map((wallet) => {
-      const signer = new ethers.Wallet(wallet.privateKey, provider);
-      return mint_nft_get_37_tokens(signer);
-    });
-    const chunk_number = chunked_wallets.indexOf(chunk);
-    await Promise.all(promises);
-    console.log(`chunk: ${chunk_number} finished`);
-
-    return promises;
+  const promises = wallets.map((wallet) => {
+    const signer = new ethers.Wallet(wallet.privateKey, provider);
+    return mint_nft_get_37_tokens(signer);
   });
+  await Promise.all(promises);
 };
 
 // const bla = async (signer) => {
