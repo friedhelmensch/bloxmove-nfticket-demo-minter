@@ -6,7 +6,7 @@ const generate_wallet = require("./lib/generate_wallet");
 const send = require("./lib/send");
 const save_wallet = require("./lib/save_wallet");
 
-//methodss
+//methods
 const mint_nft = require("./methods/mint_nft");
 const redeem_ticket = require("./methods/redeem_ticket");
 const get_erc_20 = require("./methods/get_erc_20");
