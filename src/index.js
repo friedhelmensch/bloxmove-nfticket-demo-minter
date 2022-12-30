@@ -14,20 +14,21 @@ const add_balance_to_ticket = require("./methods/add_balance_to_ticket");
 //utils
 const provider = require("./utils/provider");
 const get_contract = require("./utils/get_contract");
+const get_gas_price = require("./lib/get_gas_price");
 
 const doIt = async () => {
   const signer = new ethers.Wallet(process.env.SPENDER_PRIVATEKEY, provider);
 
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < 10; i++) {
     console.log(`----- ${i} -------`);
 
     const wallet = generate_wallet();
     save_wallet(process.env.WALLETS_PATH, wallet);
 
-    await send(signer, wallet.address, "0.25");
-    console.log(`sent 0.25 matic to ${wallet.address}`);
+    await send(signer, get_gas_price, wallet.address, "0.41");
+    console.log(`sent 0.41 matic to ${wallet.address}`);
 
-    console.log(`mint nft and get 37 tokens for ${signer.address}`);
+    console.log(`mint nft and get 37 tokens for ${wallet.address}`);
     await mint_nft_get_37_tokens(
       new ethers.Wallet(wallet.privateKey, provider)
     );

@@ -16,7 +16,7 @@ const add_balance_to_ticket = async (
 
   const add_balance_to_ticket_tx =
     await ticket_demo_contract.addBalanceToTicket(token_id, {
-      gasLimit: 3000000,
+      gasLimit: 4100000,
       gasPrice: gasPrice,
     });
 

@@ -15,9 +15,11 @@ const send = require("./lib/send");
 //lib
 const generate_wallet = require("./lib/generate_wallet");
 const get_gas_price = require("./lib/get_gas_price");
+const save_wallet = require("./lib/save_wallet");
 
 const generate = () => {
-  console.log(generate_wallet());
+  const wallet = generate_wallet();
+  save_wallet(process.env.WALLETS_PATH, wallet);
 };
 
 const get_erc = async (token_id, private_key) => {
@@ -55,4 +57,5 @@ const send_some = async (private_key, to, amount) => {
 //   "0.15"
 // );
 
+//mint(process.env.CURRENT_PRIVATEKEY);
 add_balance(123, process.env.CURRENT_PRIVATEKEY);
