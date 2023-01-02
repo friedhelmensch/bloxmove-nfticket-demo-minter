@@ -7,7 +7,7 @@ describe("get_gas_price", function () {
     const provider = get_provider(base_price);
     const gas_price = await get_gas_price(provider);
 
-    expect(gas_price).to.be.equal(Math.round(base_price * 1.09));
+    expect(gas_price).to.be.equal(Math.round(base_price * 1.2));
   });
 });
 

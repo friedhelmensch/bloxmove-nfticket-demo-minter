@@ -19,31 +19,36 @@ const save_wallet = require("./lib/save_wallet");
 
 const generate = () => {
   const wallet = generate_wallet();
-  save_wallet(process.env.WALLETS_PATH, wallet);
+  console.log(wallet);
+  //save_wallet(process.env.WALLETS_PATH, wallet);
 };
 
 const get_erc = async (token_id, private_key) => {
   const signer = new ethers.Wallet(private_key, provider);
   const contract = get_contract(signer);
-  await get_erc_20(token_id, provider, contract);
+  const gas_price = await get_gas_price(provider);
+  await get_erc_20(token_id, contract, gas_price);
 };
 
 const redeem = async (token_id, private_key) => {
   const signer = new ethers.Wallet(private_key, provider);
   const contract = get_contract(signer);
-  await redeem_ticket(token_id, provider, contract);
+  const gas_price = await get_gas_price(provider);
+  await redeem_ticket(token_id, contract, gas_price);
 };
 
 const add_balance = async (token_id, private_key) => {
   const signer = new ethers.Wallet(private_key, provider);
   const contract = get_contract(signer);
-  await add_balance_to_ticket(token_id, provider, contract);
+  const gas_price = await get_gas_price(provider);
+  await add_balance_to_ticket(token_id, contract, gas_price);
 };
 
 const mint = async (private_key) => {
   const signer = new ethers.Wallet(private_key, provider);
   const contract = get_contract(signer);
-  await mint_nft(provider, contract);
+  const gas_price = await get_gas_price(provider);
+  await mint_nft(contract, gas_price);
 };
 
 const send_some = async (private_key, to, amount) => {
@@ -57,5 +62,4 @@ const send_some = async (private_key, to, amount) => {
 //   "0.15"
 // );
 
-//mint(process.env.CURRENT_PRIVATEKEY);
-generate();
+get_erc(2940, process.env.CURRENT_PRIVATEKEY);

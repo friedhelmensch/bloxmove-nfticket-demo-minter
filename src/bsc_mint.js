@@ -15,24 +15,34 @@ const add_balance_to_ticket = require("./methods/add_balance_to_ticket");
 const provider = require("./utils/bsc_provider");
 const get_contract = require("./utils/get_contract");
 
-const doIt = async () => {
-  const wallets = await load_all_wallets(process.env.WALLETS_PATH);
+// const doIt = async () => {
+//   const wallets = await load_all_wallets(process.env.WALLETS_PATH);
+//   // const chunks = chunk_array(wallets, 2);
 
-  const promises = wallets.map((wallet) => {
-    const signer = new ethers.Wallet(wallet.privateKey, provider);
-    return mint_nft_get_37_tokens(signer);
-  });
-  await Promise.all(promises);
-};
-
-// const bla = async (signer) => {
-//   await timeout(1000);
-//   console.log(`wallet: ${signer.address}`);
+//   // for (const chunk of chunks) {
+//   const promises = wallets.map(async (wallet) => {
+//     const signer = new ethers.Wallet(wallet.privateKey, provider);
+//     return mint_nft_get_37_tokens(signer);
+//   });
+//   await Promise.all(promises);
+//   //}
 // };
 
-// function timeout(ms) {
-//   return new Promise((resolve) => setTimeout(resolve, ms));
-// }
+const doIt = async () => {
+  const wallets = await load_all_wallets(process.env.WALLETS_PATH);
+  for (const wallet of wallets) {
+    const signer = new ethers.Wallet(wallet.privateKey, provider);
+    await mint_nft_get_37_tokens(signer);
+};
+
+const bla = async (signer) => {
+  await timeout(1000);
+  console.log(`wallet: ${signer.address}`);
+};
+
+function timeout(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 const mint_nft_get_37_tokens = async (signer) => {
   const NFTicketDemoServiceContract = get_contract(signer);

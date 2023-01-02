@@ -7,7 +7,6 @@ describe("chunk_array", function () {
     const wallets = generate_wallets(8);
     const chunked_wallets = chunk_array(wallets, 3);
     expect(chunked_wallets.length).to.eq(3);
-    console.log(chunked_wallets);
   });
 });
 

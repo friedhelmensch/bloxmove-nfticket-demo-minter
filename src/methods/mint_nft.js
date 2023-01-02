@@ -1,8 +1,9 @@
-const mint_nft = async (ticket_demo_contract) => {
+const mint_nft = async (ticket_demo_contract, gasPrice) => {
   const mint_tx = await ticket_demo_contract.mintNfticket(
     "ipfs://QmXABjGNK3PbffbjZYr4iJ5FLxRooc6b6hbPXoNdkfXPRx",
     {
       gasLimit: 1000000,
+      gasPrice: gasPrice,
     }
   );
 

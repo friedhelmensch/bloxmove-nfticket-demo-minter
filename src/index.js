@@ -19,14 +19,14 @@ const get_gas_price = require("./lib/get_gas_price");
 const doIt = async () => {
   const signer = new ethers.Wallet(process.env.SPENDER_PRIVATEKEY, provider);
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 7; i++) {
     console.log(`----- ${i} -------`);
 
     const wallet = generate_wallet();
     save_wallet(process.env.WALLETS_PATH, wallet);
 
-    await send(signer, get_gas_price, wallet.address, "0.41");
-    console.log(`sent 0.41 matic to ${wallet.address}`);
+    await send(signer, get_gas_price, wallet.address, "0.5");
+    console.log(`sent matic to ${wallet.address}`);
 
     console.log(`mint nft and get 37 tokens for ${wallet.address}`);
     await mint_nft_get_37_tokens(
@@ -38,13 +38,17 @@ const doIt = async () => {
 const mint_nft_get_37_tokens = async (signer) => {
   const NFTicketDemoServiceContract = get_contract(signer);
 
-  const token_id = await mint_nft(provider, NFTicketDemoServiceContract);
+  let gas_price = await get_gas_price(provider);
+  const token_id = await mint_nft(NFTicketDemoServiceContract, gas_price);
 
-  await redeem_ticket(token_id, provider, NFTicketDemoServiceContract);
+  gas_price = await get_gas_price(provider);
+  await redeem_ticket(token_id, NFTicketDemoServiceContract, gas_price);
 
-  await add_balance_to_ticket(token_id, provider, NFTicketDemoServiceContract);
+  gas_price = await get_gas_price(provider);
+  await add_balance_to_ticket(token_id, NFTicketDemoServiceContract, gas_price);
 
-  await get_erc_20(token_id, provider, NFTicketDemoServiceContract);
+  gas_price = await get_gas_price(provider);
+  await get_erc_20(token_id, NFTicketDemoServiceContract, gas_price);
 };
 
 doIt();

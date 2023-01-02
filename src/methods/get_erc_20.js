@@ -1,6 +1,7 @@
-const get_erc_20 = async (token_id, ticket_demo_contract) => {
+const get_erc_20 = async (token_id, ticket_demo_contract, gas_price) => {
   const get_erc_20_tx = await ticket_demo_contract.getErc20(token_id, {
     gasLimit: 250000,
+    gasPrice: gas_price,
   });
 
   const get_erc_20_tx_receipt = await get_erc_20_tx.wait();
