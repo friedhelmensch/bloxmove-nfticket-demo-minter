@@ -55,11 +55,3 @@ const send_some = async (private_key, to, amount) => {
   const signer = new ethers.Wallet(private_key, provider);
   await send(signer, get_gas_price, to, amount);
 };
-
-// send_some(
-//   process.env.SPENDER_PRIVATEKEY,
-//   "",
-//   "0.15"
-// );
-
-get_erc(2940, process.env.CURRENT_PRIVATEKEY);
